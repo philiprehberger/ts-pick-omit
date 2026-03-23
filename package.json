@@ -1,6 +1,6 @@
 {
   "name": "@philiprehberger/pick-omit",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Type-safe shallow and deep pick/omit for JavaScript objects",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -26,7 +26,8 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
-    "test": "node --test"
+    "test": "node --test",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "pick",
@@ -36,7 +37,7 @@
     "filter",
     "lodash"
   ],
-  "author": "philiprehberger",
+  "author": "Philip Rehberger",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -47,7 +48,7 @@
   },
   "homepage": "https://github.com/philiprehberger/ts-pick-omit#readme",
   "engines": {
-    "node": ">=18"
+    "node": ">=18.0.0"
   },
   "devDependencies": {
     "tsup": "^8.0.0",

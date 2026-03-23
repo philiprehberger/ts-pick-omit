@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- Standardize package metadata
+
 ## 0.1.1
 
 - Standardize README badges and CHANGELOG formatting
