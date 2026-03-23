@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/philiprehberger/ts-pick-omit/actions/workflows/ci.yml/badge.svg)](https://github.com/philiprehberger/ts-pick-omit/actions/workflows/ci.yml)
 [![npm version](https://img.shields.io/npm/v/@philiprehberger/pick-omit)](https://www.npmjs.com/package/@philiprehberger/pick-omit)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/github/license/philiprehberger/ts-pick-omit)](LICENSE)
 
 Type-safe shallow and deep pick/omit for JavaScript objects.
 
