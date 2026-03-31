@@ -1,6 +1,6 @@
 {
   "name": "@philiprehberger/pick-omit",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Type-safe shallow and deep pick/omit for JavaScript objects",
   "type": "module",
   "main": "./dist/index.cjs",
