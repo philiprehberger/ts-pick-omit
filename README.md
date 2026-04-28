@@ -4,7 +4,7 @@
 [![npm version](https://img.shields.io/npm/v/@philiprehberger/pick-omit.svg)](https://www.npmjs.com/package/@philiprehberger/pick-omit)
 [![Last updated](https://img.shields.io/github/last-commit/philiprehberger/ts-pick-omit)](https://github.com/philiprehberger/ts-pick-omit/commits/main)
 
-Type-safe shallow and deep pick/omit for JavaScript objects.
+Type-safe shallow and deep pick/omit utilities for JavaScript objects
 
 ## Installation
 
@@ -15,47 +15,73 @@ npm install @philiprehberger/pick-omit
 ## Usage
 
 ```ts
-import { pick, omit, deepPick, deepOmit, pickBy, omitBy } from '@philiprehberger/pick-omit';
+import { pick, omit } from '@philiprehberger/pick-omit';
 
-// Shallow pick/omit
-pick({ a: 1, b: 2, c: 3 }, 'a', 'c');   // { a: 1, c: 3 }
-omit({ a: 1, b: 2, c: 3 }, 'b');         // { a: 1, c: 3 }
+pick({ a: 1, b: 2, c: 3 }, 'a', 'c'); // { a: 1, c: 3 }
+omit({ a: 1, b: 2, c: 3 }, 'b');      // { a: 1, c: 3 }
+```
 
-// Deep pick/omit with dot notation
+### Deep pick/omit
+
+```ts
+import { deepPick, deepOmit } from '@philiprehberger/pick-omit';
+
 const user = { name: 'Alice', address: { city: 'NYC', zip: '10001' } };
-deepPick(user, 'name', 'address.city');   // { name: 'Alice', address: { city: 'NYC' } }
-deepOmit(user, 'address.zip');            // { name: 'Alice', address: { city: 'NYC' } }
 
-// Predicate-based
-pickBy({ a: 1, b: null, c: 'ok' }, (v) => v != null);  // { a: 1, c: 'ok' }
-omitBy({ a: 1, b: null, c: 'ok' }, (v) => v == null);   // { a: 1, c: 'ok' }
+deepPick(user, 'name', 'address.city'); // { name: 'Alice', address: { city: 'NYC' } }
+deepOmit(user, 'address.zip');          // { name: 'Alice', address: { city: 'NYC' } }
+```
+
+### Predicate-based filters
+
+```ts
+import { pickBy, omitBy } from '@philiprehberger/pick-omit';
+
+pickBy({ a: 1, b: null, c: 'ok' }, (v) => v != null); // { a: 1, c: 'ok' }
+omitBy({ a: 1, b: null, c: 'ok' }, (v) => v == null); // { a: 1, c: 'ok' }
+```
+
+### Pick by `typeof`
+
+```ts
+import { pickByType } from '@philiprehberger/pick-omit';
+
+const obj = { name: 'Alice', age: 30, active: true };
+
+pickByType(obj, 'string');  // { name: 'Alice' }
+pickByType(obj, 'number');  // { age: 30 }
+pickByType(obj, 'boolean'); // { active: true }
+```
+
+### Flatten and unflatten
+
+```ts
+import { flatten, unflatten } from '@philiprehberger/pick-omit';
+
+const nested = { user: { name: 'Alice', tags: ['admin', 'staff'] } };
+
+const flat = flatten(nested);
+// { 'user.name': 'Alice', 'user.tags.0': 'admin', 'user.tags.1': 'staff' }
+
+unflatten(flat);
+// { user: { name: 'Alice', tags: ['admin', 'staff'] } }
+
+flatten({ a: { b: 1 } }, '/'); // { 'a/b': 1 }
 ```
 
 ## API
 
-### `pick<T, K>(obj: T, ...keys: K[]): Pick<T, K>`
-
-Returns a new object with only the specified keys. Type-safe with full inference.
-
-### `omit<T, K>(obj: T, ...keys: K[]): Omit<T, K>`
-
-Returns a new object without the specified keys.
-
-### `deepPick(obj, ...paths): Record<string, unknown>`
-
-Picks nested values using dot-notation paths (e.g., `'user.address.city'`).
-
-### `deepOmit(obj, ...paths): Record<string, unknown>`
-
-Removes nested values using dot-notation paths. Does not mutate the original.
-
-### `pickBy<T>(obj: T, predicate: (value, key) => boolean): Partial<T>`
-
-Picks entries where the predicate returns `true`.
-
-### `omitBy<T>(obj: T, predicate: (value, key) => boolean): Partial<T>`
-
-Omits entries where the predicate returns `true`.
+| Method | Description |
+|--------|-------------|
+| `pick(obj, ...keys)` | Returns a new object with only the specified keys |
+| `omit(obj, ...keys)` | Returns a new object without the specified keys |
+| `deepPick(obj, ...paths)` | Picks nested values using dot-notation paths |
+| `deepOmit(obj, ...paths)` | Removes nested values using dot-notation paths |
+| `pickBy(obj, predicate)` | Picks entries where the predicate returns `true` |
+| `omitBy(obj, predicate)` | Omits entries where the predicate returns `true` |
+| `pickByType(obj, typeName)` | Keeps properties whose `typeof` matches `typeName` |
+| `flatten(obj, separator?)` | Converts a nested object/array into a flat dot-notation map |
+| `unflatten(obj, separator?)` | Inverse of `flatten`; numeric segments become array indices |
 
 ## Development
 

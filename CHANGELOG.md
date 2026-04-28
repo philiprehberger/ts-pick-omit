@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0 (2026-04-27)
+
+- Add `pickByType()` to select properties by `typeof` match
+- Add `flatten()` and `unflatten()` for dot-notation conversion
+- Compliance: README one-liner cleaned up
+
 ## 0.1.3
 
 - Standardize README to 3-badge format with emoji Support section

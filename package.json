@@ -1,7 +1,7 @@
 {
   "name": "@philiprehberger/pick-omit",
-  "version": "0.1.3",
-  "description": "Type-safe shallow and deep pick/omit for JavaScript objects",
+  "version": "0.2.0",
+  "description": "Type-safe shallow and deep pick/omit utilities for JavaScript objects",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -35,7 +35,10 @@
     "object",
     "deep",
     "filter",
-    "lodash"
+    "lodash",
+    "flatten",
+    "unflatten",
+    "typescript"
   ],
   "author": "Philip Rehberger",
   "license": "MIT",
